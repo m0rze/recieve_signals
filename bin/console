@@ -1,0 +1,18 @@
+#!/usr/bin/env php
+<?php
+ini_set("max_execution_time", 0);
+
+use App\Kernel;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+
+if (!is_file(dirname(__DIR__).'/vendor/autoload_runtime.php')) {
+    throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+}
+
+require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+putenv("DATABASE_URL=mysql://".\Root\Config::$dbUser.":".\Root\Config::$dbPass."@127.0.0.1:3306/".\Root\Config::$dbName);
+return function (array $context) {
+    $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+
+    return new Application($kernel);
+};
