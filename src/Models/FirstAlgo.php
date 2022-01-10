@@ -26,10 +26,14 @@ class FirstAlgo extends Algos
 
                 $currencies = $oneThird->getSignalCurrencies();
                 if($currencies == "XAUUSD"){
-                    $currencies = "Золото\n(AUDUSD ⬆️⬆️⬆️)";
+                    $currencies = "Золото\n(AUDUSD ⬇️⬇️⬇️️)";
                 }
                 if($currencies == "XBRUSD"){
-                    $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
+                    if($signalData[0] == "UP") {
+                        $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️️)";
+                    } else {
+                        $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
+                    }
                 }
                 if(intval($signalData[1]) == -165 && intval($signalData[2]) == 570 && $signalData[0] == "UP" && $currencies != "XAUUSD" && $currencies != "XBRUSD"){
                     $urgent = "\n 🔴🔴🔴🔴🔴🔴️ \n";
@@ -58,14 +62,14 @@ class FirstAlgo extends Algos
     private function getFirstSecond($time, $currencies){
         $first = "";
         $second = $this->repo->findOneBy([
-            "signal_type" => "second_graph",
+            "signal_type" => "i2s1s2",
             "signal_time" => $time,
             "signal_currencies" => $currencies
         ]);
 
         if(!empty($second)){
             $first = $this->repo->findOneBy([
-                "signal_type" => "first_graph",
+                "signal_type" => "i1s1s2",
                 "signal_time" => $time,
                 "signal_currencies" => $currencies
             ]);
@@ -81,7 +85,7 @@ class FirstAlgo extends Algos
 
     private function getThirds(){
         return $this->repo->findBy([
-            "signal_type" => "third_graph"
+            "signal_type" => "i3s1"
         ]);
     }
 }
