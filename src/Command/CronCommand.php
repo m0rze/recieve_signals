@@ -8,6 +8,7 @@ use App\Core\Telegram;
 use App\Entity\SignalsData;
 use App\Models\FirstAlgo;
 use App\Models\SecondAlgo;
+use App\Models\ThirdAlgo;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -60,7 +61,7 @@ class CronCommand extends Command
                 Telegram::sendMessage(date("d.m.Y H:i:s")."\n 🆗 В норме 🆗");
                 $sendCheckTime = time();
             }
-            sleep(10);
+            sleep(3);
 
 
             $firstAlgo = new FirstAlgo($this->kernel, $this->entityManager);
@@ -68,6 +69,9 @@ class CronCommand extends Command
 
             $secondAlgo = new SecondAlgo($this->kernel, $this->entityManager);
             $secondAlgo->goAlgo();
+
+            $thirdAlgo = new ThirdAlgo($this->kernel, $this->entityManager);
+            $thirdAlgo->goAlgo();
 
 
         }

@@ -7,7 +7,7 @@ use App\Core\DirsFiles;
 use App\Core\Telegram;
 use App\Entity\SignalsData;
 
-class SecondAlgo extends Algos
+class ThirdAlgo extends Algos
 {
 
     public function goAlgo()
@@ -38,7 +38,7 @@ class SecondAlgo extends Algos
                 if(intval($signalData[1]) == -165 && intval($signalData[2]) == 570 && $signalData[0] == "UP" && $currencies != "XAUUSD" && $currencies != "XBRUSD"){
                     $urgent = "\n 🔴🔴🔴🔴🔴🔴️ \n";
                 }
-                $message = $urgent. "<b>🟦 Острый угол 🟦</b>\n\n";
+                $message = $urgent. "<b>🟪 Третий алгоритм 🟪</b>\n\n";
                 $message .= "<i>".date("d.m.Y H:i:s", $oneThird->getSignalTime() / 1000). "</i>\nВалюта: <b>".$currencies."</b>\n\n";
 
                 foreach ($allData as $graphNum => $oneSignalData){
@@ -70,7 +70,7 @@ class SecondAlgo extends Algos
 
         if(!empty($second)){
             $first = $this->repo->findOneBy([
-                "signal_type" => "i1s1s2",
+                "signal_type" => "i1s3",
                 "signal_time" => $time,
                 "signal_currencies" => $currencies
             ]);
@@ -86,7 +86,7 @@ class SecondAlgo extends Algos
 
     private function getThirds(){
         return $this->repo->findBy([
-            "signal_type" => "i3s2"
+            "signal_type" => "i3s3"
         ]);
     }
 }
