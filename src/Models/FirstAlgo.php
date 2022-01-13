@@ -26,7 +26,11 @@ class FirstAlgo extends Algos
 
                 $currencies = $oneThird->getSignalCurrencies();
                 if($currencies == "XAUUSD"){
-                    $currencies = "Золото\n(AUDUSD ⬇️⬇️⬇️️)";
+                    if($signalData[0] == "UP") {
+                        $currencies = "Золото\n(AUDUSD ⬆️⬆️⬆️️)";
+                    } else {
+                        $currencies = "Золото\n(AUDUSD ⬇️⬇️⬇️)";
+                    }
                 }
                 if($currencies == "XBRUSD" || $currencies == "BRTUSD"){
                     if($signalData[0] == "UP") {
