@@ -28,7 +28,7 @@ class FirstAlgo extends Algos
                 if($currencies == "XAUUSD"){
                     $currencies = "Золото\n(AUDUSD ⬇️⬇️⬇️️)";
                 }
-                if($currencies == "XBRUSD"){
+                if($currencies == "XBRUSD" || $currencies == "BRTUSD"){
                     if($signalData[0] == "UP") {
                         $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️️)";
                     } else {
@@ -43,6 +43,9 @@ class FirstAlgo extends Algos
 
                 foreach ($allData as $graphNum => $oneSignalData){
                     $message .= MessageView::convertToMessage($graphNum, $oneSignalData);
+                }
+                if(!empty($signalData[5])) {
+                    $message .= "\n<b>🟢 Длина хвоста: " . intval($signalData[5]) . "</b>";
                 }
 
                 if(!file_exists($this->kernel->getProjectDir() . "/Results/" . $oneThird->getSignalCurrencies() . "_" . $allData["third"]->getSignalTime())) {

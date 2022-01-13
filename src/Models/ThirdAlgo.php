@@ -28,7 +28,7 @@ class ThirdAlgo extends Algos
                 if($currencies == "XAUUSD"){
                     $currencies = "Золото\n(AUDUSD ⬇️⬇️⬇️️)";
                 }
-                if($currencies == "XBRUSD"){
+                if($currencies == "XBRUSD" || $currencies == "BRTUSD"){
                     if($signalData[0] == "UP") {
                         $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️️)";
                     } else {
