@@ -39,12 +39,14 @@ class FirstAlgo extends Algos
                         $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
                     }
                 }
-                if($signalData[0] == "UP"){
-                    exec("nohup php /var/www/html/trading/bin/console trading ".$currencies." UP ".$oneThird->getSignalTime()."  > ".$this->kernel->getProjectDir()."/TradingLog/".$currencies."_".$oneThird->getSignalTime().".txt &");
-                } else {
-                    exec("nohup php /var/www/html/trading/bin/console trading ".$currencies." DOWN ".$oneThird->getSignalTime()."  > ".$this->kernel->getProjectDir()."/TradingLog/".$currencies."_".$oneThird->getSignalTime().".txt &");
-                }
-                Telegram::sendOrderMessage("php /var/www/html/trading/bin/console trading ".$currencies." ".$signalData[0]." ".$oneThird->getSignalTime());
+//                if($currencies == "EURUSD" || $currencies == "EURJPY" || $currencies == "GBPUSD" || $currencies == "CHFJPY" || $currencies == "USDCHF" || $currencies == "EURCAD" || $currencies == "EURGBP") {
+//                    if ($signalData[0] == "UP") {
+//                        exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " UP " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
+//                    } else {
+//                        exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " DOWN " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
+//                    }
+//                    Telegram::sendOrderMessage("php /var/www/html/trading/bin/console trading " . $currencies . " " . $signalData[0] . " " . $oneThird->getSignalTime());
+//                }
 
                 if(intval($signalData[1]) == -165 && intval($signalData[2]) == 570 && $signalData[0] == "UP" && $currencies != "XAUUSD" && $currencies != "XBRUSD"){
                     $urgent = "\n 🔴🔴🔴🔴🔴🔴️ \n";

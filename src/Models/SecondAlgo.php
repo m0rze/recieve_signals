@@ -39,12 +39,15 @@ class SecondAlgo extends Algos
                         $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
                     }
                 }
-                if($signalData[0] == "UP"){
-                    exec("nohup php /var/www/html/trading/bin/console trading ".$currencies." UP ".$oneThird->getSignalTime()."  > ".$this->kernel->getProjectDir()."/TradingLog/".$currencies."_".$oneThird->getSignalTime().".txt &");
-                } else {
-                    exec("nohup php /var/www/html/trading/bin/console trading ".$currencies." DOWN ".$oneThird->getSignalTime()."  > ".$this->kernel->getProjectDir()."/TradingLog/".$currencies."_".$oneThird->getSignalTime().".txt &");
+                if($currencies == "EURUSD" || $currencies == "EURJPY" || $currencies == "GBPUSD" || $currencies == "CHFJPY" || $currencies == "USDCHF" || $currencies == "EURCAD" || $currencies == "EURGBP") {
+                    if ($signalData[0] == "UP") {
+                        exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " UP " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
+                    } else {
+                        exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " DOWN " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
+                    }
+                    Telegram::sendOrderMessage($currencies . " " . $oneThird->getSignalTime());
                 }
-                Telegram::sendOrderMessage($currencies." ".$oneThird->getSignalTime());
+
                 if(intval($signalData[1]) == -165 && intval($signalData[2]) == 570 && $signalData[0] == "UP" && $currencies != "XAUUSD" && $currencies != "XBRUSD"){
                     $urgent = "\n 🔴🔴🔴🔴🔴🔴️ \n";
                 }
@@ -73,14 +76,14 @@ class SecondAlgo extends Algos
     private function getFirstSecond($time, $currencies){
         $first = "";
         $second = $this->repo->findOneBy([
-            "signal_type" => "i2s1s2",
+            "signal_type" => "i2s2",
             "signal_time" => $time,
             "signal_currencies" => $currencies
         ]);
 
         if(!empty($second)){
             $first = $this->repo->findOneBy([
-                "signal_type" => "i1s1s2",
+                "signal_type" => "i1s2",
                 "signal_time" => $time,
                 "signal_currencies" => $currencies
             ]);
