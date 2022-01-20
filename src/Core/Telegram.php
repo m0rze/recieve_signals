@@ -16,6 +16,11 @@ class Telegram
 
     }
 
+    static public function sendOrderMessage($message)
+    {
+        file_get_contents("https://api.telegram.org/bot".TelegramAccounts::$ordersAccount[0]."/sendMessage?chat_id=".TelegramAccounts::$ordersAccount[1]."&text=".urlencode($message)."&parse_mode=html");
+    }
+
     static function telegram_emoji($utf8emoji) {
         preg_replace_callback(
             '@\\\x([0-9a-fA-F]{2})@x',
