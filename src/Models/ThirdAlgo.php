@@ -34,21 +34,21 @@ class ThirdAlgo extends Algos
                 }
                 if($currencies == "XBRUSD" || $currencies == "BRTUSD"){
                     if($signalData[0] == "UP") {
-                        $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️️)";
+                        $currencies = "Нефть\n(USDCAD 🔻🔻🔻️️)";
                     } else {
-                        $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
+                        $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️)";
                     }
                 }
 
                 //eurusd, eurjpy,gbpusd, eurgbp,chfjpy, usdchf, eurcad
-                if($currencies == "EURUSD" || $currencies == "EURJPY" || $currencies == "GBPUSD" || $currencies == "CHFJPY" || $currencies == "USDCHF" || $currencies == "EURCAD" || $currencies == "EURGBP") {
+                //if($currencies == "EURUSD" || $currencies == "EURJPY" || $currencies == "GBPUSD" || $currencies == "CHFJPY" || $currencies == "USDCHF" || $currencies == "EURCAD" || $currencies == "EURGBP") {
                     if ($signalData[0] == "UP") {
                         exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " UP " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
                     } else {
                         exec("nohup php /var/www/html/trading/bin/console trading " . $currencies . " DOWN " . $oneThird->getSignalTime() . "  > " . $this->kernel->getProjectDir() . "/TradingLog/" . $currencies . "_" . $oneThird->getSignalTime() . ".txt &");
                     }
                     Telegram::sendOrderMessage($currencies . " " . $oneThird->getSignalTime());
-                }
+                //}
 
 
                 if(intval($signalData[1]) == -165 && intval($signalData[2]) == 570 && $signalData[0] == "UP" && $currencies != "XAUUSD" && $currencies != "XBRUSD"){

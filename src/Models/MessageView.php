@@ -11,7 +11,7 @@ class MessageView
         $message = "";
         $signalData = explode("::", $signal->getSignalData());
         if($signalData[0] == "DOWN"){
-            $signalData[0] = "⬇️⬇️⬇️ Понижение";
+            $signalData[0] = "🔻🔻🔻️ Понижение";
         }
         if($signalData[0] == "UP"){
             $signalData[0] = "⬆️⬆️⬆️ Повышение";

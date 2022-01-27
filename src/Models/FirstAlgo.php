@@ -34,9 +34,9 @@ class FirstAlgo extends Algos
                 }
                 if($currencies == "XBRUSD" || $currencies == "BRTUSD"){
                     if($signalData[0] == "UP") {
-                        $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️️)";
+                        $currencies = "Нефть\n(USDCAD 🔻🔻🔻️️)";
                     } else {
-                        $currencies = "Нефть\n(USDCAD ⬇️⬇️⬇️)";
+                        $currencies = "Нефть\n(USDCAD ⬆️⬆️⬆️)";
                     }
                 }
 //                if($currencies == "EURUSD" || $currencies == "EURJPY" || $currencies == "GBPUSD" || $currencies == "CHFJPY" || $currencies == "USDCHF" || $currencies == "EURCAD" || $currencies == "EURGBP") {
